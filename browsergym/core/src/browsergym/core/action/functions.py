@@ -72,10 +72,10 @@ def fill(bid: str, value: str):
     def do(force: bool):
         if demo_mode != "off":
             delay = max(2000 / len(value), 10)
-            elem.clear(force=force, timeout=500)
+            elem.clear(force=force, timeout=100000)
             elem.type(value, delay=delay, timeout=0)  # no timeout
         else:
-            elem.fill(value, force=force, timeout=500)
+            elem.fill(value, force=force, timeout=100000)
 
     call_fun(do, retry_with_force)
 
@@ -92,7 +92,7 @@ def check(bid: str):
     add_demo_mode_effects(page, elem, bid, demo_mode=demo_mode, move_cursor=True)
 
     def do(force: bool):
-        elem.check(force=force, timeout=500)
+        elem.check(force=force, timeout=100000)
 
     call_fun(do, retry_with_force)
 
@@ -109,7 +109,7 @@ def uncheck(bid: str):
     add_demo_mode_effects(page, elem, bid, demo_mode=demo_mode, move_cursor=True)
 
     def do(force: bool):
-        elem.uncheck(force=force, timeout=500)
+        elem.uncheck(force=force, timeout=100000)
 
     call_fun(do, retry_with_force)
 
@@ -128,7 +128,7 @@ def select_option(bid: str, options: str | list[str]):
     add_demo_mode_effects(page, elem, bid, demo_mode=demo_mode, move_cursor=False)
 
     def do(force: bool):
-        elem.select_option(options, force=force, timeout=500)
+        elem.select_option(options, force=force, timeout=100000)
 
     call_fun(do, retry_with_force)
 
@@ -151,7 +151,7 @@ def click(
     add_demo_mode_effects(page, elem, bid, demo_mode=demo_mode, move_cursor=True)
 
     def do(force: bool):
-        elem.click(button=button, modifiers=modifiers, force=force, timeout=500)
+        elem.click(button=button, modifiers=modifiers, force=force, timeout=100000)
 
     call_fun(do, retry_with_force)
 
@@ -174,7 +174,7 @@ def dblclick(
     add_demo_mode_effects(page, elem, bid, demo_mode=demo_mode, move_cursor=True)
 
     def do(force: bool):
-        elem.click(button=button, modifiers=modifiers, force=force, timeout=500)
+        elem.click(button=button, modifiers=modifiers, force=force, timeout=100000)
 
     call_fun(do, retry_with_force)
 
@@ -193,7 +193,7 @@ def hover(bid: str):
     )
 
     def do(force: bool):
-        elem.hover(force=force, timeout=500)
+        elem.hover(force=force, timeout=100000)
 
     call_fun(do, retry_with_force)
 
@@ -218,7 +218,7 @@ def press(bid: str, key_comb: str):
     """
     elem = get_elem_by_bid(page, bid, demo_mode != "off")
     add_demo_mode_effects(page, elem, bid, demo_mode=demo_mode, move_cursor=False)
-    elem.press(key_comb, timeout=500)
+    elem.press(key_comb, timeout=100000)
 
 
 # https://playwright.dev/python/docs/api/class-locator#locator-focus
@@ -231,7 +231,7 @@ def focus(bid: str):
     """
     elem = get_elem_by_bid(page, bid, demo_mode != "off")
     add_demo_mode_effects(page, elem, bid, demo_mode=demo_mode, move_cursor=False)
-    elem.focus(timeout=500)
+    elem.focus(timeout=100000)
 
 
 # https://playwright.dev/python/docs/api/class-locator#locator-clear
@@ -244,7 +244,7 @@ def clear(bid: str):
     """
     elem = get_elem_by_bid(page, bid, demo_mode != "off")
     add_demo_mode_effects(page, elem, bid, demo_mode=demo_mode, move_cursor=False)
-    elem.clear(timeout=500)
+    elem.clear(timeout=100000)
 
 
 # https://playwright.dev/python/docs/input#drag-and-drop
@@ -259,12 +259,12 @@ def drag_and_drop(from_bid: str, to_bid: str):
     """
     from_elem = get_elem_by_bid(page, from_bid, demo_mode != "off")
     add_demo_mode_effects(page, from_elem, from_bid, demo_mode=demo_mode, move_cursor=True)
-    from_elem.hover(timeout=500)
+    from_elem.hover(timeout=100000)
     page.mouse.down()
 
     to_elem = get_elem_by_bid(page, to_bid, demo_mode != "off")
     add_demo_mode_effects(page, to_elem, to_bid, demo_mode=demo_mode, move_cursor=True)
-    to_elem.hover(timeout=500)
+    to_elem.hover(timeout=100000)
     page.mouse.up()
 
 
@@ -606,7 +606,7 @@ def upload_file(bid: str, file: str | list[str]):
     add_demo_mode_effects(page, elem, bid, demo_mode=demo_mode, move_cursor=True)
 
     with page.expect_file_chooser() as fc_info:
-        elem.click(timeout=500)
+        elem.click(timeout=100000)
 
     file_chooser = fc_info.value
     file_chooser.set_files(file)
